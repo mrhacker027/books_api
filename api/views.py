@@ -11,3 +11,10 @@ def books_list(request):
     books = models.Book.objects.all()
     serializer = serializers.BookSerializer(books, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def books_detail(request, pk):
+    book = models.Book.objects.get(pk=pk)
+    serializer = serializers.BookDetailSerializer(book)
+    return Response(serializer.data, status=status.HTTP_200_OK)
