@@ -54,3 +54,8 @@ def books_delete(request, pk):
     book = models.Book.objects.get(pk=pk)
     book.delete()
     return Response({"message": "no content"}, status=status.HTTP_204_NO_CONTENT)
+
+
+class CategoryModelViewSet(ModelViewSet):
+    queryset = models.Category.objects.all()
+    serializer_class = serializers.CategorySerializer
