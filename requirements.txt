@@ -2,3 +2,4 @@ django
 pillow
 drf-yasg
 djangorestframework
+djangorestframework-simplejwt

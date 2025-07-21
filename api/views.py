@@ -1,6 +1,8 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.viewsets import ModelViewSet
 
 import main.models as models
 import api.serializers as serializers
@@ -20,6 +22,10 @@ def books_detail(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@swagger_auto_schema(
+    method="post",
+    request_body=serializers.BookPostSerializer
+)
 @api_view(["POST"])
 def books_create(request):
     serializer = serializers.BookPostSerializer(data=request.data)
@@ -29,6 +35,10 @@ def books_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(
+    method="put",
+    request_body=serializers.BookPostSerializer
+)
 @api_view(["PUT"])
 def books_update(request, pk):
     book = models.Book.objects.get(pk=pk)
